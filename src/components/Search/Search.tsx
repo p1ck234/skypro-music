@@ -1,11 +1,14 @@
+import styles from "./Search.module.css";
+import clsx from "clsx";
+
 export const Search = () => {
   return (
-    <div class="centerblock__search search">
-      <svg class="search__svg">
-        <use xlink:href="img/icon/sprite.svg#icon-search"></use>
+    <div className={clsx(styles.centerblockSearch, styles.search)}>
+      <svg className={styles.searchSvg}>
+        <use xlinkHref="img/icon/sprite.svg#icon-search"></use>
       </svg>
       <input
-        class="search__text"
+        className={styles.searchText}
         type="search"
         placeholder="Поиск"
         name="search"

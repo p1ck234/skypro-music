@@ -1,10 +1,37 @@
+import styles from "./Filter.module.css";
+import clsx from "clsx";
+
 export const Filter = () => {
   return (
-    <div class="centerblock__filter filter">
-      <div class="filter__title">Искать по:</div>
-      <div class="filter__button button-author _btn-text">исполнителю</div>
-      <div class="filter__button button-year _btn-text">году выпуска</div>
-      <div class="filter__button button-genre _btn-text">жанру</div>
+    <div className={clsx(styles.centerblockFilterm, styles.filter)}>
+      <div className={styles.filterTitle}>Искать по:</div>
+      <div
+        className={clsx(
+          styles.filterButton,
+          styles.buttonAuthor,
+          styles._btnText
+        )}
+      >
+        исполнителю
+      </div>
+      <div
+        className={clsx(
+          styles.filterButton,
+          styles.buttonYear,
+          styles._btnText
+        )}
+      >
+        году выпуска
+      </div>
+      <div
+        className={clsx(
+          styles.filterButton,
+          styles.buttonGenre,
+          styles._btnText
+        )}
+      >
+        жанру
+      </div>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import { Filter } from "../Filter/Filter";
+import { Search } from "../Search/Search";
 import styles from "./Centerblock.module.css";
 import clsx from "clsx";
 
@@ -16,7 +18,9 @@ export const Centerblock = () => {
             name="search"
           />
         </div> */}
+        <Search />
         <h2 className={styles.centerBlockHeading2}>Треки</h2>
+        <Filter />
         {/* <div class="centerblock__filter filter">
           <div class="filter__title">Искать по:</div>
           <div class="filter__button button-author _btn-text">исполнителю</div>
