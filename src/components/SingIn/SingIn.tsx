@@ -34,7 +34,7 @@ export const SingIn = () => {
               <a href="../index.html">Войти</a>
             </button>
             <button className={styles.modalBtnSignup}>
-              <a href="signup.html">Зарегистрироваться</a>
+              <a href="/signup">Зарегистрироваться</a>
             </button>
           </form>
         </div>

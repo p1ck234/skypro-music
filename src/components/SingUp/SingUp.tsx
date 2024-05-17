@@ -37,7 +37,7 @@ export const SingUp = () => {
               placeholder="Повторите пароль"
             />
             <button className={styles.modalBtnSingUp}>
-              <a href="../index.html">Зарегистрироваться</a>
+              <a href="/">Зарегистрироваться</a>
             </button>
           </form>
         </div>

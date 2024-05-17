@@ -1,5 +1,5 @@
-import { SingUp } from "@/components/SingUp/SingUp";
+import { SingUp } from "@components/SingUp/SingUp";
 
-export default function Home() {
+export default function SingUpPage() {
   return <SingUp />;
 }
