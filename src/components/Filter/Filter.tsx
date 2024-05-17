@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 export const Filter = () => {
   return (
-    <div className={clsx(styles.centerblockFilterm, styles.filter)}>
+    <div className={clsx(styles.centerblockFilter, styles.filter)}>
       <div className={styles.filterTitle}>Искать по:</div>
       <div
         className={clsx(

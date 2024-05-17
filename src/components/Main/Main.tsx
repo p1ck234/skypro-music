@@ -11,7 +11,7 @@ export const Main = () => {
         <main className={styles.main}>
           <Menu />
           <Centerblock />
-          {/* <Sidebar /> */}
+          <Sidebar />
         </main>
         {/* <Player /> */}
         <footer className={styles.footer}></footer>
