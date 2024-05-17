@@ -1,82 +1,87 @@
+import styles from "./Player.module.css";
+import clsx from "clsx";
+
 export const Player = () => {
   return (
     <div>
-      <div class="bar">
-        <div class="bar__content">
-          <div class="bar__player-progress"></div>
-          <div class="bar__player-block">
-            <div class="bar__player player">
-              <div class="player__controls">
-                <div class="player__btn-prev">
-                  <svg class="player__btn-prev-svg">
-                    <use xlink:href="img/icon/sprite.svg#icon-prev"></use>
+      <div className={styles.bar}>
+        <div className={styles.barContent}>
+          <div className={styles.barPlayerProgress}></div>
+          <div className={styles.barPlayerBlock}>
+            <div className={clsx(styles.barPlayer, styles.player)}>
+              <div className={styles.playerControls}>
+                <div className={styles.playerBtnPrev}>
+                  <svg className={styles.playerBtnPrevSvg}>
+                    <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
                   </svg>
                 </div>
-                <div class="player__btn-play _btn">
-                  <svg class="player__btn-play-svg">
-                    <use xlink:href="img/icon/sprite.svg#icon-play"></use>
+                <div className={clsx(styles.playerBtnPlay, styles._btn)}>
+                  <svg className={styles.playerBtnPlaySvg}>
+                    <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
                   </svg>
                 </div>
-                <div class="player__btn-next">
-                  <svg class="player__btn-next-svg">
-                    <use xlink:href="img/icon/sprite.svg#icon-next"></use>
+                <div className={styles.playerBtnNext}>
+                  <svg className={styles.playerBtnNextSvg}>
+                    <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
                   </svg>
                 </div>
-                <div class="player__btn-repeat _btn-icon">
-                  <svg class="player__btn-repeat-svg">
-                    <use xlink:href="img/icon/sprite.svg#icon-repeat"></use>
+                <div className={clsx(styles.playerBtnRepeat, styles._btnIcon)}>
+                  <svg className={styles.playerBtnRepeatSvg}>
+                    <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
                   </svg>
                 </div>
-                <div class="player__btn-shuffle _btn-icon">
-                  <svg class="player__btn-shuffle-svg">
-                    <use xlink:href="img/icon/sprite.svg#icon-shuffle"></use>
+                <div className={clsx(styles.playerBtnShuffle, styles._btnIcon)}>
+                  <svg className={styles.playerBtnShuffleSvg}>
+                    <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
                   </svg>
                 </div>
               </div>
 
-              <div class="player__track-play track-play">
-                <div class="track-play__contain">
-                  <div class="track-play__image">
-                    <svg class="track-play__svg">
-                      <use xlink:href="img/icon/sprite.svg#icon-note"></use>
+              <div className={clsx(styles.playerTrackPlay, styles.trackPlay)}>
+                <div className={styles.trackPlayContain}>
+                  <div className={styles.trackPlayImage}>
+                    <svg className={styles.trackPlaySvg}>
+                      <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
                     </svg>
                   </div>
-                  <div class="track-play__author">
-                    <a class="track-play__author-link" href="http://">
+                  <div className={styles.trackPlayAuthor}>
+                    <a className={styles.trackPlayAuthorLink} href="http://">
                       Ты та...
                     </a>
                   </div>
-                  <div class="track-play__album">
-                    <a class="track-play__album-link" href="http://">
+                  <div className={styles.trackPlayAlbum}>
+                    <a className={styles.trackPlayAlbumLink} href="http://">
                       Баста
                     </a>
                   </div>
                 </div>
 
-                <div class="track-play__like-dis">
-                  <div class="track-play__like _btn-icon">
-                    <svg class="track-play__like-svg">
-                      <use xlink:href="img/icon/sprite.svg#icon-like"></use>
+                <div className={styles.trackPlayLikeDis}>
+                  <div className={clsx(styles.trackPlayLike, styles._btnIcon)}>
+                    <svg className={styles.trackPlayLikeSvg}>
+                      <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
                     </svg>
                   </div>
-                  <div class="track-play__dislike _btn-icon">
-                    <svg class="track-play__dislike-svg">
-                      <use xlink:href="img/icon/sprite.svg#icon-dislike"></use>
+                  <div
+                    className={clsx(styles.trackPlayDislike, styles._btnIcon)}
+                  >
+                    <svg className={styles.trackPlayDislikeSvg}>
+                      <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
                     </svg>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="bar__volume-block volume">
-              <div class="volume__content">
-                <div class="volume__image">
-                  <svg class="volume__svg">
-                    <use xlink:href="img/icon/sprite.svg#icon-volume"></use>
+            <div className={clsx(styles.barVolumeBlock, styles.volume)}>
+              <div className={styles.volumeContent}>
+                <div className={styles.volumeImage}>
+                  <svg className={styles.volumeSvg}>
+                    <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
                   </svg>
                 </div>
-                <div class="volume__progress _btn">
+                <div className={clsx(styles.volumeProgress, styles._btn)}>
                   <input
-                    class="volume__progress-line _btn"
+                    className={clsx(styles.volumeProgressLine, styles._btn)}
                     type="range"
                     name="range"
                   />

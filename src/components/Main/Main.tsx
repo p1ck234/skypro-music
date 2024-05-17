@@ -13,7 +13,7 @@ export const Main = () => {
           <Centerblock />
           <Sidebar />
         </main>
-        {/* <Player /> */}
+        <Player />
         <footer className={styles.footer}></footer>
       </div>
     </div>
