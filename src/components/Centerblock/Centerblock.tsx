@@ -7,26 +7,9 @@ export const Centerblock = () => {
   return (
     <div>
       <div className={clsx(styles.centerblock, styles.centerblock)}>
-        {/* <div class="centerblock__search search">
-          <svg class="search__svg">
-            <use xlink:href="img/icon/sprite.svg#icon-search"></use>
-          </svg>
-          <input
-            class="search__text"
-            type="search"
-            placeholder="Поиск"
-            name="search"
-          />
-        </div> */}
         <Search />
         <h2 className={styles.centerBlockHeading2}>Треки</h2>
         <Filter />
-        {/* <div class="centerblock__filter filter">
-          <div class="filter__title">Искать по:</div>
-          <div class="filter__button button-author _btn-text">исполнителю</div>
-          <div class="filter__button button-year _btn-text">году выпуска</div>
-          <div class="filter__button button-genre _btn-text">жанру</div>
-        </div> */}
         <div
           className={clsx(styles.centerBlockContent, styles.playlistContent)}
         >
@@ -56,19 +39,19 @@ export const Centerblock = () => {
                     </svg>
                   </div>
                   <div className={styles.trackListText}>
-                    <a className={styles.trackListLink} href="http://">
+                    <a className={styles.trackListLink} href="#">
                       Guilt
                       <span className={styles.trackTitleSpan}></span>
                     </a>
                   </div>
                 </div>
                 <div className={styles.trackAuthor}>
-                  <a className={styles.trackAuthorLink} href="http://">
+                  <a className={styles.trackAuthorLink} href="#">
                     Nero
                   </a>
                 </div>
                 <div className={styles.trackAlbum}>
-                  <a className={styles.trackAlbumLink} href="http://">
+                  <a className={styles.trackAlbumLink} href="#">
                     Welcome Reality
                   </a>
                 </div>
