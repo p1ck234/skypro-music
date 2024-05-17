@@ -9,8 +9,8 @@ export const Main = () => {
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <main className={styles.main}>
-          {/* <Menu />
-          <Centerblock />
+          <Menu />
+          {/* <Centerblock />
           <Sidebar /> */}
         </main>
         {/* <Player /> */}

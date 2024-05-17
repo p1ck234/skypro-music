@@ -10,7 +10,7 @@ export const Menu = () => {
           width={113.33}
           height={17}
           alt="Логотип"
-          src="img/logo.png"
+          src="/img/logo.png"
         />
       </div>
       <div className={styles.navBurger}>
