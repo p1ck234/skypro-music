@@ -1,6 +1,7 @@
 import styles from "./SingUp.module.css";
 import clsx from "clsx";
 import Image from "next/image";
+import Link from "next/link";
 
 export const SingUp = () => {
   return (
@@ -37,7 +38,7 @@ export const SingUp = () => {
               placeholder="Повторите пароль"
             />
             <button className={styles.modalBtnSingUp}>
-              <a href="/">Зарегистрироваться</a>
+              <Link href="/">Зарегистрироваться</Link>
             </button>
           </form>
         </div>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./SingIn.module.css";
 import clsx from "clsx";
+import Link from "next/link";
 
 export const SingIn = () => {
   return (
@@ -31,10 +32,10 @@ export const SingIn = () => {
               placeholder="Пароль"
             />
             <button className={styles.modalBtnEnter}>
-              <a href="../index.html">Войти</a>
+              <Link href="/">Войти</Link>
             </button>
             <button className={styles.modalBtnSignup}>
-              <a href="/signup">Зарегистрироваться</a>
+              <Link href="/singup">Зарегистрироваться</Link>
             </button>
           </form>
         </div>

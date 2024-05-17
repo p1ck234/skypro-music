@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./Menu.module.css";
 import Image from "next/image";
 
@@ -31,9 +32,9 @@ export const Menu = () => {
             </a>
           </li>
           <li className={styles.menuItem}>
-            <a href="signin" className={styles.menuLink}>
+            <Link href="/singin" className={styles.menuLink}>
               Войти
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
