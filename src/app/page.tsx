@@ -1,5 +1,7 @@
-import { Main } from "@/components/Main/Main";
+import { Main } from "@components/Main/Main";
 
-export default function Home() {
+export const Home = () => {
   return <Main />;
-}
+};
+
+export default Home;

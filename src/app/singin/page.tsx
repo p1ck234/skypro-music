@@ -1,5 +1,7 @@
 import { SingIn } from "@components/SingIn/SingIn";
 
-export default function SingInPage() {
+export const SingInPage = () => {
   return <SingIn />;
-}
+};
+
+export default SingInPage;

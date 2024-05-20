@@ -8,8 +8,8 @@ export const Menu = () => {
       <div className={styles.navLogo}>
         <Image
           className={styles.logoImage}
-          width={113.33}
-          height={17}
+          width={227}
+          height={34}
           alt="Логотип"
           src="/img/logo.png"
         />

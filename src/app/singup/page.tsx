@@ -1,5 +1,7 @@
 import { SingUp } from "@components/SingUp/SingUp";
 
-export default function SingUpPage() {
+export const SingUpPage = () => {
   return <SingUp />;
-}
+};
+
+export default SingUpPage;
