@@ -1,13 +1,13 @@
 "use client"
+import { useState } from "react";
 import Link from "next/link";
 import styles from "./Menu.module.css";
 import Image from "next/image";
-import { useState } from "react";
 
 export const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toogleMenu = () => {
+  const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
@@ -22,32 +22,35 @@ export const Menu = () => {
           src="/img/logo.png"
         />
       </div>
-      <div className={styles.navBurger} onClick={toogleMenu}>
+      <div
+        className={`${styles.navBurger} ${isOpen ? styles.open : ""}`}
+        onClick={toggleMenu}
+      >
         <span className={styles.burgerLine}></span>
         <span className={styles.burgerLine}></span>
         <span className={styles.burgerLine}></span>
       </div>
-      {isOpen && (
-        <div className={styles.navMenu}>
-          <ul className={styles.menuList}>
-            <li className={styles.menuItem}>
-              <a href="#" className={styles.menuLink}>
-                Главное
-              </a>
-            </li>
-            <li className={styles.menuItem}>
-              <a href="#" className={styles.menuLink}>
-                Мой плейлист
-              </a>
-            </li>
-            <li className={styles.menuItem}>
-              <Link href="/singin" className={styles.menuLink}>
-                Войти
-              </Link>
-            </li>
-          </ul>
-        </div>
-      )}
+      <div
+        className={`${styles.navMenu} ${isOpen ? styles.openMenu : styles.closeMenu}`}
+      >
+        <ul className={styles.menuList}>
+          <li className={styles.menuItem}>
+            <a href="#" className={styles.menuLink}>
+              Главное
+            </a>
+          </li>
+          <li className={styles.menuItem}>
+            <a href="#" className={styles.menuLink}>
+              Мой плейлист
+            </a>
+          </li>
+          <li className={styles.menuItem}>
+            <Link href="/signin" className={styles.menuLink}>
+              Войти
+            </Link>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 };
