@@ -3,11 +3,12 @@ import { Search } from "../Search/Search";
 import styles from "./Centerblock.module.css";
 import clsx from "clsx";
 import { getTracks } from "@/api/api";
+import { TrackType } from "@/types/types";
 
 export const Centerblock = async () => {
-  const tracks = await getTracks();
-  console.log(tracks);
+  
 
+  const tracks = await getTracks();
   return (
     <div>
       <div className={clsx(styles.centerblock, styles.centerblock)}>
@@ -35,7 +36,7 @@ export const Centerblock = async () => {
           </div>
 
           <div className={clsx(styles.contentPlaylist, styles.playlist)}>
-            {tracks.map((track, index) => {
+            {tracks.map((track: TrackType, index: number) => {
               return (
                 <div className={styles.playlistItem} key={index}>
                   <div className={clsx(styles.playlistTrack, styles.track)}>
