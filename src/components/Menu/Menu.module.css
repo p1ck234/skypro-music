@@ -43,7 +43,7 @@
 }
 
 .navBurger:hover .burgerLine {
-  background-color: #7b7b7b; /* измените цвет фона на ваш выбор */
+  background-color: #7b7b7b;
 }
 
 .navMenu {
@@ -54,14 +54,13 @@
   transition: max-height 0.3s ease-out;
 }
 
-.openMenu {
-  max-height: 500px; /* или любое другое значение, достаточное для отображения всего меню */
-}
-
 .closeMenu {
   max-height: 0;
 }
 
+.openMenu {
+  max-height: 500px;
+}
 .menuList {
   padding: 18px 0 10px 0;
 }

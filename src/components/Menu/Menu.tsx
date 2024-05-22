@@ -1,14 +1,15 @@
-"use client"
+"use client";
 import { useState } from "react";
 import Link from "next/link";
 import styles from "./Menu.module.css";
 import Image from "next/image";
+import clsx from "clsx";
 
 export const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
   return (
@@ -23,7 +24,7 @@ export const Menu = () => {
         />
       </div>
       <div
-        className={`${styles.navBurger} ${isOpen ? styles.open : ""}`}
+        className={clsx(styles.navBurger, { [styles.open]: isOpen })}
         onClick={toggleMenu}
       >
         <span className={styles.burgerLine}></span>
@@ -31,7 +32,9 @@ export const Menu = () => {
         <span className={styles.burgerLine}></span>
       </div>
       <div
-        className={`${styles.navMenu} ${isOpen ? styles.openMenu : styles.closeMenu}`}
+        className={clsx(styles.navMenu, styles.closeMenu, {
+          [styles.openMenu]: isOpen,
+        })}
       >
         <ul className={styles.menuList}>
           <li className={styles.menuItem}>
