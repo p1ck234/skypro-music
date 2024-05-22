@@ -1,23 +1,23 @@
-import { Filter } from "../Filter/Filter";
 import { Search } from "../Search/Search";
-import styles from "./Centerblock.module.css";
+import styles from "./SongList.module.css";
 import clsx from "clsx";
 import { getTracks } from "@/api/api";
 import { TrackType } from "@/types/types";
+import { Sorting } from "../Sorting/Sorting";
 
-export const Centerblock = async () => {
-  
-
-  const tracks = await getTracks();
+export const SongList = async () => {
+  const tracks: TrackType[] = await getTracks();
+  const uniqueAuthors = Array.from(
+    new Set(tracks.map((track) => track.author))
+  );
+  console.log(uniqueAuthors);
   return (
     <div>
-      <div className={clsx(styles.centerblock, styles.centerblock)}>
+      <div className={clsx(styles.mainSongList, styles.songList)}>
         <Search />
-        <h2 className={styles.centerBlockHeading2}>Треки</h2>
-        <Filter />
-        <div
-          className={clsx(styles.centerBlockContent, styles.playlistContent)}
-        >
+        <h2 className={styles.songListHeading2}>Треки</h2>
+        <Sorting />
+        <div className={clsx(styles.songListContent, styles.playlistContent)}>
           <div className={clsx(styles.contentTitle, styles.playlistTitle)}>
             <div className={clsx(styles.playlistTitleCol, styles.col01)}>
               Трек
@@ -43,7 +43,9 @@ export const Centerblock = async () => {
                     <div className={styles.trackTitle}>
                       <div className={styles.trackTitleImage}>
                         <svg className={styles.trackTitleSvg}>
-                          <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                          <svg className={styles.trackTitleSvg}>
+                            <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                          </svg>
                         </svg>
                       </div>
                       <div className={styles.trackListText}>
