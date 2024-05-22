@@ -24,6 +24,7 @@ export const Sidebar = () => {
                   alt="day's playlist"
                   width={250}
                   height={150}
+                  priority={true}
                 />
               </a>
             </div>
