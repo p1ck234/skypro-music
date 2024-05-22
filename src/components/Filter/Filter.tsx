@@ -1,37 +1,37 @@
-import styles from "./Filter.module.css";
 import clsx from "clsx";
+import styles from "./Filter.module.css";
+import { FC } from "react";
 
-export const Filter = () => {
+type Props = {
+  title: string;
+  list: string[];
+  value: string;
+  isOpen: boolean;
+  onClick: (value: string) => void;
+};
+
+const Filter: FC<Props> = ({ title, list, value, isOpen, onClick }) => {
   return (
-    <div className={clsx(styles.centerblockFilter, styles.filter)}>
-      <div className={styles.filterTitle}>Искать по:</div>
-      <div
-        className={clsx(
-          styles.filterButton,
-          styles.buttonAuthor,
-          styles._btnText
-        )}
-      >
-        исполнителю
-      </div>
-      <div
+    <div>
+      <button
         className={clsx(
           styles.filterButton,
           styles.buttonYear,
           styles._btnText
         )}
+        onClick={() => onClick(value)}
       >
-        году выпуска
-      </div>
-      <div
-        className={clsx(
-          styles.filterButton,
-          styles.buttonGenre,
-          styles._btnText
-        )}
-      >
-        жанру
-      </div>
+        {title}
+      </button>
+      {isOpen && (
+        <ul>
+          {list.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
+
+export default Filter;
