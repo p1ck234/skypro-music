@@ -33,7 +33,7 @@ export const Sorting: FC<Props> = ({ tracks }) => {
     },
   ];
   return (
-    <div className={clsx(styles.centerBlockFilter, styles.filter)}>
+    <div className={clsx(styles.sortingBlockFilter, styles.filter)}>
       <div className={styles.filterTitle}>Искать по:</div>
       {sortingData.map((item, index) => (
         <Filter
