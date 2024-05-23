@@ -12,21 +12,23 @@ type Props = {
 
 const Filter: FC<Props> = ({ title, list, value, isOpen, onClick }) => {
   return (
-    <div>
+    <div className={styles.filterContainer}>
       <button
-        className={clsx(
-          styles.filterButton,
-          styles.buttonYear,
-          styles._btnText
-        )}
+        className={clsx(styles.filterButton, styles._btnText, {
+          [styles.filterButtonActive]: isOpen,
+        })}
         onClick={() => onClick(value)}
       >
         {title}
       </button>
       {isOpen && (
-        <ul>
+        <ul className={styles.filterList}>
           {list.map((item, index) => (
-            <li key={index}>{item}</li>
+            <li key={index} className={styles.filterItem}>
+              <a href="#" className={styles.filterLink}>
+                {item}
+              </a>
+            </li>
           ))}
         </ul>
       )}
