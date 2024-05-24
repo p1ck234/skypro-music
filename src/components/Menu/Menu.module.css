@@ -32,6 +32,7 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .burgerLine {
@@ -41,11 +42,25 @@
   background-color: #d3d3d3;
 }
 
+.navBurger:hover .burgerLine {
+  background-color: #7b7b7b;
+}
+
 .navMenu {
   display: block;
   visibility: visible;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
 }
 
+.closeMenu {
+  max-height: 0;
+}
+
+.openMenu {
+  max-height: 500px;
+}
 .menuList {
   padding: 18px 0 10px 0;
 }

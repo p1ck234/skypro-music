@@ -1,4 +1,4 @@
-.mainCenterBlock {
+.mainSongList {
   width: auto;
   -webkit-box-flex: 3;
   -ms-flex-positive: 3;
@@ -6,7 +6,7 @@
   padding: 20px 40px 20px 111px;
 }
 
-.centerBlockHeading2 {
+.songListHeading2 {
   font-style: normal;
   font-weight: 400;
   font-size: 64px;
@@ -15,7 +15,7 @@
   margin-bottom: 45px;
 }
 
-.centerBlockContent {
+.songListContent {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
