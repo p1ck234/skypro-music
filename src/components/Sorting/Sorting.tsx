@@ -14,7 +14,7 @@ export const Sorting: FC<Props> = ({ tracks }) => {
   const handledFilterValue = (value: string) => {
     setFilterValue((prev) => (prev === value ? null : value));
   };
-
+  
   const sortingData = [
     {
       title: "исполнителю",
@@ -32,6 +32,7 @@ export const Sorting: FC<Props> = ({ tracks }) => {
       value: "genre",
     },
   ];
+  
   return (
     <div className={clsx(styles.sortingBlockFilter, styles.filter)}>
       <div className={styles.filterTitle}>Искать по:</div>
