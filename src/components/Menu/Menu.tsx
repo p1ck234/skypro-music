@@ -48,7 +48,7 @@ export const Menu = () => {
             </a>
           </li>
           <li className={styles.menuItem}>
-            <Link href="/signin" className={styles.menuLink}>
+            <Link href="/singin" className={styles.menuLink}>
               Войти
             </Link>
           </li>
