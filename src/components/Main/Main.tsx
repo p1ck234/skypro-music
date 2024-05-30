@@ -1,22 +1,28 @@
+"use client";
 import styles from "./Main.module.css";
 import { Menu } from "../Menu/Menu";
 import { Sidebar } from "../Sidebar/Sidebar";
 import { SongList } from "../SongList/SongList";
-import { Player } from "../Player/Player";
+import Player from "../Player/Player";
 import { TrackType } from "@/types/types";
-import { getTracks } from "@/api/api";
+import { FC, useState } from "react";
 
-export const Main = async () => {
-  const tracks: TrackType[] = await getTracks();
+type Props = {
+  tracks: TrackType[];
+};
+
+export const Main: FC<Props> = ({ tracks }) => {
+  const [track, setTrack] = useState<TrackType | null>(null);
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <main className={styles.main}>
           <Menu />
-          <SongList tracks={tracks} />
+          <SongList tracks={tracks} setTrack={setTrack} />
           <Sidebar />
         </main>
-        <Player />
+        {track && <Player track={track} />}
+
         <footer className={styles.footer}></footer>
       </div>
     </div>
