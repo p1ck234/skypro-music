@@ -52,17 +52,6 @@
   justify-content: flex-start;
 }
 
-.barVolumeBlock {
-  width: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding: 0 92px 0 0;
-}
-
 .playerControls {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -96,6 +85,9 @@
   width: 15px;
   height: 14px;
 }
+._btn {
+  cursor: pointer;
+}
 
 .playerBtnPlay {
   margin-right: 23px;
@@ -128,6 +120,25 @@
   height: 12px;
   fill: transparent;
   stroke: #696969;
+}
+
+._btnIcon:hover svg {
+  fill: transparent;
+  stroke: #acacac;
+  cursor: pointer;
+}
+
+._btnIcon_active svg {
+  fill: transparent;
+  stroke: #ffffff;
+  cursor: pointer;
+}
+
+._btnIcon:active .trackPlayLikeSvg,
+._btnIcon:active .trackPlayDislikeSvg {
+  fill: #696969;
+  stroke: #ffffff;
+  cursor: pointer;
 }
 
 .playerBtnShuffle {
@@ -216,15 +227,16 @@
   grid-column: 2;
   grid-area: album;
   min-width: 49px;
+  max-width: 150px;
 }
 
 .trackPlayAlbumLink {
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
-  line-height: 24px;
   color: #ffffff;
 }
+
 
 .trackPlayLikeDis {
   display: -webkit-box;
@@ -263,20 +275,18 @@
   stroke: #696969;
 }
 
-.volumeContent {
-  display: -webkit-box;
-  display: -ms-flexbox;
+.barVolumeBlock {
+  width: auto;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
+  padding: 0 92px 0 0;
+}
+
+.volumeContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
 }
 
 .volumeImage {
@@ -288,7 +298,7 @@
 .volumeSvg {
   width: 13px;
   height: 18px;
-  fill: transparent;
+  fill: white; /* Updated to match the white icon in the screenshot */
 }
 
 .volumeProgress {
@@ -296,24 +306,41 @@
 }
 
 .volumeProgressLine {
-  width: 109px;
+  height: 5px;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  background: #797979; /* Grey background for the slider track */
 }
 
-._btnIcon:hover svg {
-  fill: transparent;
-  stroke: #acacac;
-  cursor: pointer;
+.volumeProgressLine::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 12px;
+  width: 12px;
+  background-color: white; /* White background for the thumb */
+  border-radius: 50%;
+  border: 2px solid black; /* Black border for the thumb */
+  transition: 0.2s ease-in-out;
 }
 
-._btnIcon:active svg {
-  fill: transparent;
-  stroke: #ffffff;
-  cursor: pointer;
+.volumeProgressLine::-moz-range-thumb {
+  height: 12px;
+  width: 12px;
+  background-color: white; /* White background for the thumb */
+  border-radius: 50%;
+  border: 2px solid black; /* Black border for the thumb */
+  transition: 0.2s ease-in-out;
 }
 
-._btnIcon:active .trackPlayLike-svg,
-._btnIcon:active .trackPlayDislike-svg {
-  fill: #696969;
-  stroke: #ffffff;
-  cursor: pointer;
+
+.trackTime {
+  position: absolute;
+  right: 20px;
+  bottom: 90px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #696969;
 }
