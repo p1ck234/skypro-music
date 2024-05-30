@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import { TrackType } from "@/types/types";
 import clsx from "clsx";
@@ -7,6 +8,7 @@ import { Sorting } from "../Sorting/Sorting";
 
 type Props = {
   tracks: TrackType[];
+  setTrack: (param: TrackType) => void;
 };
 
 const formatDuration = (seconds: number) => {
@@ -15,7 +17,7 @@ const formatDuration = (seconds: number) => {
   return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
 };
 
-export const SongList: FC<Props> = ({ tracks }) => {
+export const SongList: FC<Props> = ({ tracks, setTrack }) => {
   return (
     <div>
       <div className={clsx(styles.mainSongList, styles.songList)}>
@@ -42,7 +44,11 @@ export const SongList: FC<Props> = ({ tracks }) => {
 
           <div className={clsx(styles.contentPlaylist, styles.playlist)}>
             {tracks.map((track) => (
-              <div className={styles.playlistItem} key={track.id}>
+              <div
+                className={styles.playlistItem}
+                key={track.id}
+                onClick={() => setTrack(track)}
+              >
                 <div className={clsx(styles.playlistTrack, styles.track)}>
                   <div className={styles.trackTitle}>
                     <div className={styles.trackTitleImage}>
