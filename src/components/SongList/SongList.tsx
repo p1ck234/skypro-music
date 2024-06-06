@@ -10,7 +10,7 @@ type Props = {
   tracks: TrackType[];
   };
 
-export const SongList: FC<Props> = ({ tracks, setTrack }) => {
+export const SongList: FC<Props> = ({ tracks }) => {
   return (
     <div>
       <div className={clsx(styles.mainSongList, styles.songList)}>

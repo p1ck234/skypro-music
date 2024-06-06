@@ -5,12 +5,19 @@ import styles from "./Player.module.css";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { TrackType } from "@/types/types";
 import clsx from "clsx";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
+import {
+  setIsPlaying,
+  setIsShuffle,
+  setNextTrack,
+  setPrevTrack,
+} from "@/store/features/playlistSlice";
 
-type PlayerType = {
-  track: TrackType;
-};
+export default function Player() {
+  const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
+  const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
+  const isShuffle = useAppSelector((state) => state.playlist.isShuffle);
 
-export default function Player({ track }: PlayerType) {
   const audioRef = useRef<null | HTMLAudioElement>(null);
 
   const [currentTime, setCurrentTime] = useState<number>(0);
