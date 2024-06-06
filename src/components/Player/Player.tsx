@@ -3,7 +3,6 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import styles from "./Player.module.css";
 import ProgressBar from "../ProgressBar/ProgressBar";
-import { TrackType } from "@/types/types";
 import clsx from "clsx";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import {
@@ -19,11 +18,10 @@ export default function Player() {
   const isShuffle = useAppSelector((state) => state.playlist.isShuffle);
 
   const audioRef = useRef<null | HTMLAudioElement>(null);
-
   const [currentTime, setCurrentTime] = useState<number>(0);
-  const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isLoop, setIsLoop] = useState(false);
   const [volume, setVolume] = useState(0.5);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (audioRef.current) {
@@ -56,7 +54,7 @@ export default function Player() {
         play();
       }
     }
-    setIsPlaying(!isPlaying);
+    dispatch(setIsPlaying());
   };
 
   const play = () => {
@@ -68,7 +66,7 @@ export default function Player() {
       setCurrentTime(audioRef.current!.currentTime)
     );
     play();
-  }, [track]);
+  }, [currentTrack]);
 
   useEffect(() => {
     if (isLoop) {
@@ -85,14 +83,32 @@ export default function Player() {
     }
   };
 
+  const handleNext = () => {
+    dispatch(setNextTrack());
+    dispatch(setIsPlaying());
+  };
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.addEventListener("ended", handleNext);
+    }
+
+    return () => {
+      audioRef.current?.removeEventListener("ended", handleNext);
+    };
+  }, [currentTrack, audioRef]);
   const alertMessage = () => {
     alert("Еще не реализовано");
   };
 
+  if (!currentTrack) {
+    return null;
+  }
+
   return (
     <div className={styles.bar}>
       <div className={styles.barContent}>
-        <audio ref={audioRef} src={track.track_file}></audio>
+        <audio ref={audioRef} src={currentTrack.track_file}></audio>
         <ProgressBar
           max={duration}
           value={currentTime}
@@ -105,7 +121,10 @@ export default function Player() {
         <div className={styles.barPlayerBlock}>
           <div className={clsx(styles.barPlayer, styles.player)}>
             <div className={styles.playerControls}>
-              <div className={styles.playerBtnPrev} onClick={alertMessage}>
+              <div
+                className={styles.playerBtnPrev}
+                onClick={() => dispatch(setPrevTrack())}
+              >
                 <svg className={styles.playerBtnPrevSvg}>
                   <use xlinkHref="img/icon/sprite.svg#icon-prev" />
                 </svg>
@@ -123,7 +142,10 @@ export default function Player() {
                 </svg>
               </div>
 
-              <div className={styles.playerBtnNext} onClick={alertMessage}>
+              <div
+                className={styles.playerBtnNext}
+                onClick={() => dispatch(setNextTrack())}
+              >
                 <svg className={styles.playerBtnNextSvg}>
                   <use xlinkHref="img/icon/sprite.svg#icon-next" />
                 </svg>
@@ -139,8 +161,10 @@ export default function Player() {
                 </svg>
               </div>
               <div
-                className={clsx(styles.playerBtnShuffle, styles._btnIcon)}
-                onClick={alertMessage}
+                onClick={() => dispatch(setIsShuffle())}
+                className={clsx(styles.playerBtnShuffle, styles._btnIcon, {
+                  [styles._btnIcon_active]: isShuffle,
+                })}
               >
                 <svg className={styles.playerBtnShuffleSvg}>
                   <use xlinkHref="img/icon/sprite.svg#icon-shuffle" />
@@ -156,12 +180,12 @@ export default function Player() {
                 </div>
                 <div className={styles.trackPlayAuthor}>
                   <a className={styles.trackPlayAuthorLink} href="http://">
-                    {track.author}
+                    {currentTrack.author}
                   </a>
                 </div>
                 <div className={styles.trackPlayAlbum}>
                   <a className={styles.trackPlayAlbumLink} href="http://">
-                    {track.name}
+                    {currentTrack.name}
                   </a>
                 </div>
               </div>
