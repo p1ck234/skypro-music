@@ -85,7 +85,6 @@ export default function Player() {
 
   const handleNext = () => {
     dispatch(setNextTrack());
-    dispatch(setIsPlaying());
   };
 
   useEffect(() => {
