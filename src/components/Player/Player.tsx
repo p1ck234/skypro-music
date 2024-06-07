@@ -59,6 +59,7 @@ export default function Player() {
 
   const play = () => {
     audioRef.current?.play();
+    if (!isPlaying) dispatch(setIsPlaying());
   };
 
   useEffect(() => {
