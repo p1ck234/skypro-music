@@ -84,6 +84,7 @@ export default function Player() {
   };
 
   const handleNext = () => {
+    if (isLoop) return;
     dispatch(setNextTrack());
   };
 
@@ -95,7 +96,7 @@ export default function Player() {
     return () => {
       audioRef.current?.removeEventListener("ended", handleNext);
     };
-  }, [currentTrack, audioRef]);
+  }, [currentTrack, audioRef, isLoop]);
   const alertMessage = () => {
     alert("Еще не реализовано");
   };
