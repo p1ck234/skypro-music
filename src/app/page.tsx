@@ -1,19 +1,23 @@
-import { getTracks } from "@/api/api";
-import { TrackType } from "@/types/types";
-import { Main } from "@components/Main/Main";
+import Bar from "@/components/Bar/Bar";
+import Navigation from "@/components/Navigation/Navigation";
+import SideBar from "@/components/SideBar/SideBar";
+import CenterBlock from "@/components/CenterBlock/CenterBlock";
 
-export const Home = async () => {
-  let tracks: TrackType[] = [];
-  let error: string | null = null;
-  try {
-    tracks = await getTracks();
-  } catch (err: unknown) {
-    error =
-      err instanceof Error
-        ? "Ошибка при загрузке треков. " + err.message
-        : "Неизвестная ошибка";
-  }
-  return <Main tracks={tracks} />;
-};
 
-export default Home;
+export default function Home() {
+ 
+
+  return (
+    <div className="wrapper">
+      <div className="container">
+        <main className="main">
+          <Navigation />
+          <CenterBlock />
+          <SideBar />
+        </main>
+        <Bar />
+        <footer className="footer" />
+      </div>
+    </div>
+  );
+}

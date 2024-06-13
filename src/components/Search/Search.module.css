@@ -13,7 +13,6 @@
   -ms-flex-align: center;
   align-items: center;
 }
-
 .searchSvg {
   width: 17px;
   height: 17px;
@@ -21,7 +20,6 @@
   stroke: #ffffff;
   fill: transparent;
 }
-
 .searchText {
   -webkit-box-flex: 100;
   -ms-flex-positive: 100;

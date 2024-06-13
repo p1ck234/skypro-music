@@ -3,7 +3,6 @@
   background-color: #181818;
   padding: 20px 0 20px 36px;
 }
-
 .navLogo {
   width: 113.33px;
   height: 43px;
@@ -11,13 +10,11 @@
   background-color: transparent;
   margin-bottom: 20px;
 }
-
 .logoImage {
-  width: 114px;
-  height: 18px;
+  width: 113.33px;
+  height: 17px;
   color: #181818;
 }
-
 .navBurger {
   width: 20px;
   height: 36px;
@@ -32,34 +29,16 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  cursor: pointer;
 }
-
 .burgerLine {
   display: inline-block;
   width: 100%;
   height: 1px;
   background-color: #d3d3d3;
 }
-
-.navBurger:hover .burgerLine {
-  background-color: #7b7b7b;
-}
-
 .navMenu {
   display: block;
   visibility: visible;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-}
-
-.closeMenu {
-  max-height: 0;
-}
-
-.openMenu {
-  max-height: 500px;
 }
 .menuList {
   padding: 18px 0 10px 0;
