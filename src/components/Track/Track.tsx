@@ -1,70 +1,66 @@
-import React, { FC } from "react";
-import clsx from "clsx";
-import styles from "./Track.module.css";
-import { formatDuration } from "@/utils/formatDuration";
-import { TrackType } from "@/types/types";
-import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { SetCurrentTrack } from "@/store/features/playlistSlice";
+`use client`;
 
-type Props = {
-  tracks: TrackType[];
+import { durationFormat } from "@/utils/utils";
+import styles from "./Track.module.css";
+import { TrackType } from "@/types/types";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import { setCurrentTrack, setIsPlaying } from "@/store/features/playlistSlice";
+import clsx from "clsx";
+
+type PlaylistType = {
   track: TrackType;
+  tracksData: TrackType[];
 };
 
-const Track: FC<Props> = ({ track, tracks }) => {
-  const { name, author, album, duration_in_seconds, id } = track;
-  const dispatch = useAppDispatch();
+export default function Track({ track, tracksData }: PlaylistType) {
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
   const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
+  const { name, author, album, duration_in_seconds, id } = track;
+  const isCurrentTrack = currentTrack ? currentTrack.id === id : false;
+  const dispatch = useAppDispatch();
+
+  const HandleTrackClick = () => {
+    dispatch(setCurrentTrack({ track, tracksData }));
+    dispatch(setIsPlaying(true));
+  };
   return (
-    <div
-      className={styles.playlistItem}
-      onClick={() =>
-        dispatch(SetCurrentTrack({ currentTrack: track, tracks: tracks }))
-      }
-    >
-      <div className={clsx(styles.playlistTrack, styles.track)}>
+    <div onClick={HandleTrackClick} className={styles.playlistItem}>
+      <div className={styles.playlistTrack}>
         <div className={styles.trackTitle}>
-          <div
-            className={clsx(styles.trackTitleImage, {
-              [styles.trackTitleImageActive]:
-                isPlaying && currentTrack?.id === id,
-              [styles.trackTitleImageNotActive]:
-                !isPlaying && currentTrack?.id === id,
-            })}
-          >
-            <svg className={styles.trackTitleSvg}>
-              <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
+          <div className={styles.trackTitleImage}>
+            <svg
+              className={clsx(styles.trackTitleSvg, {
+                [styles.trackIconIsplaying]: isPlaying && isCurrentTrack,
+              })}
+            >
+              <use
+                xlinkHref={`img/icon/sprite.svg#${
+                  isCurrentTrack ? "icon-isplaying" : "icon-note"
+                }`}
+              />
             </svg>
           </div>
-          <div className={styles.trackListText}>
-            <a className={styles.trackListLink} href="#">
-              {name}
-              <span className={styles.trackTitleSpan}></span>
-            </a>
+          <div className={styles.trackTitleText}>
+            <span className={styles.trackTitleLink}>
+              {name} <span className={styles.trackTitleSpan} />
+            </span>
           </div>
         </div>
         <div className={styles.trackAuthor}>
-          <a className={styles.trackAuthorLink} href="#">
-            {author}
-          </a>
+          <span className={styles.trackAuthorLink}>{author}</span>
         </div>
         <div className={styles.trackAlbum}>
-          <a className={styles.trackAlbumLink} href="#">
-            {album}
-          </a>
+          <span className={styles.trackAlbumLink}>{album}</span>
         </div>
         <div className={styles.trackTime}>
           <svg className={styles.trackTimeSvg}>
-            <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
+            <use xlinkHref="img/icon/sprite.svg#icon-like" />
           </svg>
           <span className={styles.trackTimeText}>
-            {formatDuration(duration_in_seconds)}
+            {durationFormat(duration_in_seconds)}
           </span>
         </div>
       </div>
     </div>
   );
-};
-
-export default Track;
+}

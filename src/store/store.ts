@@ -5,7 +5,7 @@ import { playlistReducer } from "./features/playlistSlice";
 // Функция makeStore создает и возвращает хранилище Redux с помощью функции configureStore.
 export const makeStore = () => {
   return configureStore({
-    // Мы передаем объект, в котором свойство reducer содержит корневой редьюсер, объединяющий все редьюсеры нашего приложения.
+    // Мы передаем объект, в котором свойство reducer содержит корневой редюсер, объединяющий все редюсеры нашего приложения.
     reducer: combineReducers({
       playlist: playlistReducer,
     }),
@@ -20,3 +20,4 @@ export type RootState = ReturnType<AppStore["getState"]>;
 
 // Тип AppDispatch представляет собой тип функции диспетчера, который возвращает функция dispatch хранилища Redux.
 export type AppDispatch = AppStore["dispatch"];
+

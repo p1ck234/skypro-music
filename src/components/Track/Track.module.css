@@ -58,7 +58,7 @@
   stroke: #4e4e4e;
 }
 
-.trackListLink {
+.trackTitleLink {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -75,13 +75,11 @@
 }
 
 .trackAuthor {
-  width: 321px;
+  width: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
+
 }
 
 .trackAuthorLink {
@@ -94,7 +92,11 @@
 }
 
 .trackAlbum {
-  width: 245px;
+  width: 235px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #696969;
 }
 
 .trackAlbumLink {
@@ -111,7 +113,33 @@
   margin-right: 17px;
   fill: transparent;
   stroke: #696969;
+  
 }
+
+.trackIconIsplaying {
+  width: 16px;
+  height: 16px;
+  background-color: #b672ff;
+  border-radius: 8px;
+  display: block;
+  animation: bubble_out 1200ms infinite;
+}
+
+@keyframes bubble_out {
+  0% {
+    transform: scale(0.8);
+  }
+  25% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
 
 .trackTimeText {
   font-style: normal;
@@ -120,47 +148,14 @@
   line-height: 24px;
   text-align: right;
   color: #696969;
+  margin-right: 12px;
 }
-
-.trackTitleImageActive {
-  position: relative;
-}
-
-.trackTitleImageActive::before {
-  content: "";
-  position: absolute;
-  margin: auto;
-
-  width: 16px;
-  height: 16px;
-  background-color: #b672ff;
-  border-radius: 8px;
-  display: block;
-  animation: bubble_out 0.6s ease-in-out infinite both;
-}
-
-.trackTitleImageNotActive {
-  position: relative;
-}
-
-.trackTitleImageNotActive::before {
-  content: "";
-  position: absolute;
-  margin: auto;
-
-  width: 16px;
-  height: 16px;
-  background-color: #b672ff;
-  border-radius: 8px;
-  display: block;
-}
-
-@keyframes bubble_out {
-  0%,
-  to {
-    transform: scale(0.5);
-  }
-  50% {
-    transform: scale(1);
-  }
+/* .trackTitleText {
+  
+} */
+.trackTime{
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

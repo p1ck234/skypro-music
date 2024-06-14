@@ -1,21 +1,4 @@
-.mainSongList {
-  width: auto;
-  -webkit-box-flex: 3;
-  -ms-flex-positive: 3;
-  flex-grow: 3;
-  padding: 20px 40px 20px 111px;
-}
-
-.songListHeading2 {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 64px;
-  line-height: 72px;
-  letter-spacing: -0.8px;
-  margin-bottom: 45px;
-}
-
-.songListContent {
+.centerblockContent {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -23,8 +6,8 @@
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  height: 500px;
 }
-
 .contentTitle {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -41,18 +24,6 @@
   justify-content: space-between;
   margin-bottom: 24px;
 }
-
-.contentPlaylist {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  overflow-y: auto;
-}
-
 .playlistTitleCol {
   font-style: normal;
   font-weight: 400;
@@ -62,7 +33,6 @@
   color: #696969;
   text-transform: uppercase;
 }
-
 .playlistTitleSvg {
   width: 12px;
   height: 12px;
@@ -71,18 +41,32 @@
 }
 
 .col01 {
-  width: 447px;
+  width: 437px;
 }
 
 .col02 {
-  width: 321px;
+  width: 296px;
 }
 
 .col03 {
-  width: 245px;
+  width: 268px;
 }
 
 .col04 {
-  width: 60px;
+  width: 32px;
   text-align: end;
+  margin-right: 16px;
+}
+.contentPlaylist {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 673px;
+  
+  
 }
