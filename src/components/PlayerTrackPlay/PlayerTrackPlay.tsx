@@ -12,7 +12,7 @@ export default function PlayerTrackPlay({ track }: TrackPlayType) {
       <div className={styles.trackPlayContain}>
         <div className={styles.trackPlayImage}>
           <svg className={styles.trackPlaySvg}>
-            <use xlinkHref="img/icon/sprite.svg#icon-note" />
+            <use xlinkHref="/img/icon/sprite.svg#icon-note" />
           </svg>
         </div>
         <div className={styles.trackPlayAuthor}>
@@ -25,12 +25,12 @@ export default function PlayerTrackPlay({ track }: TrackPlayType) {
       <div className={styles.trackPlayLikeDis}>
         <div className={clsx(styles.trackPlayLike, styles.btnIcon)}>
           <svg className={styles.trackPlayLikeSvg}>
-            <use xlinkHref="img/icon/sprite.svg#icon-like" />
+            <use xlinkHref="/img/icon/sprite.svg#icon-like" />
           </svg>
         </div>
         <div className={clsx(styles.trackPlayDislike, styles.btnIcon)}>
           <svg className={styles.trackPlayDislikeSvg}>
-            <use xlinkHref="img/icon/sprite.svg#icon-dislike" />
+            <use xlinkHref="/img/icon/sprite.svg#icon-dislike" />
           </svg>
         </div>
       </div>
