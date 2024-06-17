@@ -7,13 +7,11 @@ import { setFilters } from "@/store/features/playlistSlice";
 import { order } from "../data";
 import { useEffect, useState } from "react";
 
-//Псевдоним типа. В нашем случае это список(item)
 type FilterItemType = {
   title: string;
   value: "author" | "genre" | "order";
   handleFilterClick: (newFilter: string) => void;
   isOpened: boolean;
-  tracksData: TrackType[];
   list: string[];
 };
 
@@ -23,9 +21,11 @@ export default function FilterItem({
   value,
   isOpened,
   list,
-  tracksData,
 }: FilterItemType) {
   const dispatch = useAppDispatch();
+
+  const tracksData = useAppSelector((state) => state.playlist.initialTracks);
+
   const [filterNumber, SetFilterNumber] = useState<number>(0);
 
   const orderList = useAppSelector(

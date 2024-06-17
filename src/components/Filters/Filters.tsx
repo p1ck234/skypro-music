@@ -3,10 +3,9 @@ import { useState } from "react";
 import FilterItem from "./FilterItem/FilterItem";
 import styles from "./Filters.module.css";
 import { filters, order } from "./data";
-import { TrackType } from "@/types/types";
 import { useAppSelector } from "@/hooks/hooks";
 
-export default function Filters({ tracksData }: { tracksData: TrackType[] }) {
+export default function Filters() {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
   const authorsList = useAppSelector(
@@ -25,7 +24,7 @@ export default function Filters({ tracksData }: { tracksData: TrackType[] }) {
       return order;
     }
   };
-  //Обработчик клика
+
   function handleFilterClick(newFilter: string) {
     setActiveFilter((prev) => (prev === newFilter ? null : newFilter));
   }
@@ -40,7 +39,6 @@ export default function Filters({ tracksData }: { tracksData: TrackType[] }) {
           handleFilterClick={handleFilterClick}
           title={filter.title}
           value={filter.value}
-          tracksData={tracksData}
         />
       ))}
     </div>
