@@ -14,7 +14,6 @@ export default function TrackLayout({
         <main className={styles.main}>
           <Navigation />
           {children}
-          <SideBar />
         </main>
         <Bar />
         <footer className={styles.footer} />
