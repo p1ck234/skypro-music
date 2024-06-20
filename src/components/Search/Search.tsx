@@ -1,7 +1,9 @@
+"use client";
 import { ChangeEvent, useState } from "react";
 import styles from "./Search.module.css";
 import { useAppDispatch } from "@/hooks/hooks";
 import { setFilters } from "@/store/features/playlistSlice";
+import Navigation from "../Navigation/Navigation";
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState("");
@@ -13,18 +15,20 @@ export default function Search() {
   };
 
   return (
-    <div className={styles.centerblockSearch}>
-      <svg className={styles.searchSvg}>
-        <use href="/img/icon/sprite.svg#icon-search" />
-      </svg>
-      <input
-        className={styles.searchText}
-        type="search"
-        placeholder="Поиск"
-        name="search"
-        value={searchValue}
-        onChange={handleChange}
-      />
-    </div>
+    <>
+      <div className={styles.centerblockSearch}>
+        <svg className={styles.searchSvg}>
+          <use href="/img/icon/sprite.svg#icon-search" />
+        </svg>
+        <input
+          className={styles.searchText}
+          type="search"
+          placeholder="Поиск"
+          name="search"
+          value={searchValue}
+          onChange={handleChange}
+        />
+      </div>
+    </>
   );
 }
