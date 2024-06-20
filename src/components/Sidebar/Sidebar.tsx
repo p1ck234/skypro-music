@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import styles from "./SideBar.module.css";
 import Image from "next/image";
@@ -5,14 +6,14 @@ import Image from "next/image";
 export default function SideBar() {
   return (
     <div className={styles.mainSidebar}>
-      <div className={styles.sidebarPersonal}>
+      {/* <div className={styles.sidebarPersonal}>
         <p className={styles.sidebarPersonalName}>Sergey.Ivanov</p>
         <div className={styles.sidebarIcon}>
           <svg>
             <use href="/img/icon/sprite.svg#logout" />
           </svg>
         </div>
-      </div>
+      </div> */}
       <div className={styles.sidebarBlock}>
         <div className={styles.sidebarList}>
           <div className={styles.sidebarItem}>
