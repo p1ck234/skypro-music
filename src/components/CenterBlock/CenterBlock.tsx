@@ -13,11 +13,11 @@ export default function CenterBlock({
   playlist: TrackType[];
 }) {
   return (
-    <div className={styles.mainCenterblock}>
-      <Search />
-      <h2 className={styles.centerblockH2}>Треки</h2>
-      <Filters />
+    <>
+      {/* <Search /> */}
+      {/* <h2 className={styles.centerblockH2}>Треки</h2>
+      <Filters /> */}
       <Playlist tracks={tracks} playlist={playlist} />
-    </div>
+    </>
   );
 }
