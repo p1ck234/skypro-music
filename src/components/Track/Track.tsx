@@ -21,7 +21,8 @@ export default function Track({ track, tracksData }: PlaylistType) {
 
   const HandleTrackClick = () => {
     dispatch(setCurrentTrack({ track, tracksData }));
-    dispatch(setIsPlaying(true));
+    dispatch(setIsPlaying(!isPlaying));
+    
   };
   return (
     <div onClick={HandleTrackClick} className={styles.playlistItem}>
