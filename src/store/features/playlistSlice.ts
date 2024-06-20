@@ -42,8 +42,8 @@ const playlistSlice = createSlice({
       state,
       action: PayloadAction<{ initialTracks: TrackType[] }>
     ) => {
-      state.initialTracks = action.payload.initialTracks;
-      state.filteredTracks = action.payload.initialTracks;
+      state.initialTracks = action.payload?.initialTracks;
+      state.filteredTracks = action.payload?.initialTracks;
     },
     setCurrentTrack: (
       state,
