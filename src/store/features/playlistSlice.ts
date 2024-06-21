@@ -98,11 +98,22 @@ const playlistSlice = createSlice({
       }>
     ) => {
       state.filterOptions = {
-        genre: action.payload.genre || state.filterOptions.genre,
-        author: action.payload.author || state.filterOptions.author,
-        order: action.payload.order || state.filterOptions.order,
+        genre:
+          action.payload.genre !== undefined
+            ? action.payload.genre
+            : state.filterOptions.genre,
+        author:
+          action.payload.author !== undefined
+            ? action.payload.author
+            : state.filterOptions.author,
+        order:
+          action.payload.order !== undefined
+            ? action.payload.order
+            : state.filterOptions.order,
         searchValue:
-          action.payload.searchValue || state.filterOptions.searchValue,
+          action.payload.searchValue !== undefined
+            ? action.payload.searchValue
+            : state.filterOptions.searchValue,
       };
       let filteredArr = state.initialTracks.filter((track) => {
         const hasAuthors = state.filterOptions.author.length !== 0;
