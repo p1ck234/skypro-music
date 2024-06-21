@@ -1,13 +1,32 @@
 "use client";
-import { getPlaylistTracks } from "@/api/api";
+import { getPlaylistTracks, getTracks } from "@/api/api";
 import CenterBlock from "@/components/CenterBlock/CenterBlock";
-import styles from "../../layout.module.css";
+import styles from "./page.module.css";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import { useEffect, useState } from "react";
+import { TrackType } from "@/types/types";
+import { setInitialTracks } from "@/store/features/playlistSlice";
 type CategoryType = {
   params: { id: string };
 };
 
-export default async function CategoryPage({ params }: CategoryType) {
-  const tracksData = await getPlaylistTracks(params.id);
+export default function CategoryPage({ params }: CategoryType) {
+  const dispatch = useAppDispatch();
+  const [tracks, setTracks] = useState<TrackType[]>([]);
+  const filteredTracks = useAppSelector(
+    (state) => state.playlist.filteredTracks
+  );
+
+  useEffect(() => {
+    getTracks()
+      .then((tracksData) => {
+        setTracks(tracksData);
+        dispatch(setInitialTracks({ initialTracks: tracksData }));
+      })
+      .catch((error: any) => {
+        throw new Error(error.message);
+      });
+  }, [dispatch]);
 
   let title = "";
   switch (params.id) {
@@ -27,7 +46,7 @@ export default async function CategoryPage({ params }: CategoryType) {
   return (
     <div className={styles.mainCenterblock}>
       <h2 className={styles.centerblockH2}>{title}</h2>
-      <CenterBlock tracks={tracksData} playlist={tracksData} />
+      <CenterBlock tracks={filteredTracks} playlist={tracks} />
     </div>
   );
 }
