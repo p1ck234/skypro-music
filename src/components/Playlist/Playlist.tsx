@@ -1,7 +1,7 @@
 "use client";
 
 import Track from "../Track/Track";
-import styles from "./Plaulist.module.css";
+import styles from "./Playlist.module.css";
 import clsx from "clsx";
 import { TrackType } from "@/types/types";
 
