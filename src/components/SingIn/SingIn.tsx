@@ -87,7 +87,7 @@ export const SingIn = () => {
               placeholder="Пароль"
             />
             <button type="submit" className={styles.modalBtnEnter}>
-              Войти
+              <p className={styles.modalBtnEnterText}>Войти</p>
             </button>
             <button className={styles.modalBtnSignup}>
               <Link href="/signup">Зарегистрироваться</Link>
