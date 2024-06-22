@@ -27,6 +27,8 @@ export default function Bar() {
   useEffect(() => {
     if (isPlaying) {
       audioRef.current?.play();
+    } else {
+      audioRef.current?.pause(); // вот эту
     }
   }, [isPlaying, currentTrack]);
 

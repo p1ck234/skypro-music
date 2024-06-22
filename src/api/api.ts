@@ -1,10 +1,22 @@
-const host = "https://skypro-music-api.skyeng.tech/catalog";
+const apiUrl = "https://skypro-music-api.skyeng.tech/catalog/track/all/";
+const apiUrPlaylist = "https://skypro-music-api.skyeng.tech/catalog/selection/";
 
-export const getTracks = async () => {
-  const response = await fetch(`${host}/track/all/`, {
-    method: "GET",
-  });
+export async function getTracks() {
+  const res = await fetch(apiUrl);
 
-  const data = await response.json();
-  return data;
-};
+  if (!res.ok) {
+    throw new Error("Ошибка при получении данных");
+  }
+
+  return res.json();
+}
+
+export async function getPlaylistTracks(id: string) {
+  const res = await fetch(apiUrPlaylist + id);
+
+  if (!res.ok) {
+    throw new Error("Ошибка при получении данных");
+  }
+  const data = await res.json();
+  return data.items;
+}
