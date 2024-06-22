@@ -1,5 +1,5 @@
 "use client";
-import { getPlaylistTracks, getTracks } from "@/api/api";
+import { getPlaylistTracks } from "@/api/api";
 import CenterBlock from "@/components/CenterBlock/CenterBlock";
 import styles from "./page.module.css";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
@@ -18,7 +18,7 @@ export default function CategoryPage({ params }: CategoryType) {
   );
 
   useEffect(() => {
-    getTracks()
+    getPlaylistTracks(params.id)
       .then((tracksData) => {
         setTracks(tracksData);
         dispatch(setInitialTracks({ initialTracks: tracksData }));
