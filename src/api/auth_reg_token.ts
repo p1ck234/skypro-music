@@ -1,4 +1,4 @@
-import { UserType } from "@/types";
+import { userType } from "@/types/types";
 
 const apiUrlUser = "https://skypro-music-api.skyeng.tech/user/";
 
@@ -18,7 +18,6 @@ type SigninType = {
   password: string;
 };
 
-//Зарегистрироваться
 
 export async function postRegUser({ email, passwordfirst }: SignupType) {
   const res = await fetch(apiUrlUser + signup, {
@@ -40,7 +39,6 @@ export async function postRegUser({ email, passwordfirst }: SignupType) {
   return data;
 }
 
-//Войти
 
 export async function postAuthUser({ email, password }: SigninType) {
   const res = await fetch(apiUrlUser + login, {
@@ -60,8 +58,6 @@ export async function postAuthUser({ email, password }: SigninType) {
   return data;
 }
 
-//Получить токен
-
 export async function postToken({ email, password }: SigninType) {
   const res = await fetch(apiUrlUser + token, {
     method: "POST",
@@ -80,9 +76,7 @@ export async function postToken({ email, password }: SigninType) {
   return data;
 }
 
-//Обновить токен
-
-export async function postRefreshToken({ refresh }: UserType) {
+export async function postRefreshToken({ refresh }: userType) {
   const res = await fetch(apiUrlUser + tokenRefresh, {
     method: "POST",
     body: JSON.stringify({
