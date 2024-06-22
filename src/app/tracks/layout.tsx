@@ -11,7 +11,6 @@ export default function TracksLayout({
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <main className={styles.main}>
-          {/* <Navigation /> */}
           <Header />
           {children}
         </main>

@@ -1,6 +1,7 @@
 "use client";
 import Playlist from "../Playlist/Playlist";
 import { TrackType } from "@/types/types";
+import styles from './CentarBlock.module.css'
 
 export default function CenterBlock({
   tracks,
@@ -12,8 +13,11 @@ export default function CenterBlock({
   isFavorite?: boolean;
 }) {
   return (
-    <>
-      <Playlist tracks={tracks} playlist={playlist} isFavorite={isFavorite} />
-    </>
+    <div className={styles.contentPlaylist}>
+      {tracks?.length === 0
+          ? "Нет треков, удовлетворяющих условиям фильтра"
+          : ""}
+      {<Playlist tracks={tracks} playlist={playlist} isFavorite={isFavorite} />}
+    </div>
   );
 }
