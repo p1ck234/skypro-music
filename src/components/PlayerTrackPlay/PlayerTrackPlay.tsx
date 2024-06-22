@@ -19,7 +19,7 @@ export default function PlayerTrackPlay({ track }: TrackPlayType) {
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
   useEffect(() => {
-    if (userData && track) {
+    if (userData && track && track.stared_user) {
       setIsLiked(track.stared_user.some((u) => u.id === userData.id));
     }
   }, [track, userData]);
