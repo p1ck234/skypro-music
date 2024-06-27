@@ -1,60 +1,39 @@
-.mainCenterblock {
-  width: auto;
-  -webkit-box-flex: 3;
-  -ms-flex-positive: 3;
-  flex-grow: 3;
-  padding: 20px 40px 20px 200px;
-}
 
-.centerblockH2 {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 64px;
-  line-height: 72px;
-  letter-spacing: -0.8px;
-  margin-bottom: 45px;
-}
-.centerblockFilter {
+
+.centerblockContent {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-bottom: 51px;
-}
-.filterTitle {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  margin-right: 15px;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
-.filterButton {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  border: 1px solid #ffffff;
-  border-radius: 60px;
-  padding: 6px 20px;
+.contentPlaylist {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 673px;
 }
 
-.filter__button:not(:last-child) {
-  margin-right: 10px;
+.contentPlaylist::-webkit-scrollbar {
+  width: 6px;
+  
 }
-._btnText:hover {
-  border-color: #d9b6ff;
-  color: #d9b6ff;
-  cursor: pointer;
+
+.contentPlaylist::-webkit-scrollbar-track {
+  background: #4b4949;
 }
-._btnText:active {
-  border-color: #ad61ff;
-  color: #ad61ff;
-  cursor: pointer;
+
+.contentPlaylist::-webkit-scrollbar-thumb {
+  height: 65px;
+  background-color: blue;   
+  border-radius: 8px;       
+  border: 3px solid #FFFFFF;  
 }

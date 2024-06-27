@@ -6,13 +6,16 @@ export type userType = {
   first_name: string;
   last_name: string;
   email: string;
+  password: string;
+  refresh: string;
 };
 
 export type TrackType = {
+  isFavorite?: boolean;
   id: number;
   name: string;
   author: string;
-  release_date: number;
+  release_date: string;
   genre: string;
   duration_in_seconds: number;
   album: string;

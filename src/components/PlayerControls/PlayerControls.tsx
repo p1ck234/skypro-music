@@ -61,7 +61,7 @@ export default function PlayerControls({
         <svg className={styles.playerBtnRepeatSvg}>
           <use
             xlinkHref={`/img/icon/sprite.svg#${
-              isLooping ? "icon-repeat" : "icon-repeat-toggled"
+              !isLooping ? "icon-repeat" : "icon-repeat-toggled"
             }`}
           />
         </svg>

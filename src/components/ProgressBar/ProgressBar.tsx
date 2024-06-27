@@ -12,6 +12,7 @@ const ProgressBar = React.memo(
   ({ max = 0, value, step, onChange }: ProgressBarType) => {
     return (
       <input
+        data-testid="progress-bar"
         className={styles.styledProgressInput} // Применение стилей к ползунку
         type="range" // Тип элемента - ползунок
         min="0" // Минимальное значение ползунка
