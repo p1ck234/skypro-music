@@ -24,6 +24,7 @@ export default function FavoriteTracksPage() {
       })
       .catch((error) => {
         if (error.message === "401") {
+          alert("Вам необходимо авторизоваться!");
           dispatch(setAuthState(false));
           router.push("/signin");
         } else {
