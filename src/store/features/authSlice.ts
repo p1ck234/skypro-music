@@ -1,6 +1,5 @@
 import { getValueFromLocalStorage } from "@/utils/getValueFromLS";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { useState } from "react";
 
 type AuthStateType = {
   authState: boolean;
@@ -8,10 +7,11 @@ type AuthStateType = {
     id: number;
     email: string;
     username: string;
-  };
+  } | null;
   token: {
     access: string;
-  };
+    refresh: string;
+  } | null;
 };
 
 function checkLSAuth(key: string) {
@@ -26,7 +26,7 @@ function checkLSAuth(key: string) {
 const initialState: AuthStateType = {
   authState: !!checkLSAuth("user"),
   userData: checkLSAuth("user"),
-  token: {access: checkLSAuth("token")}
+  token: checkLSAuth("token"),
 };
 
 const authSlice = createSlice({
@@ -41,30 +41,25 @@ const authSlice = createSlice({
       action: PayloadAction<{
         email?: string;
         username?: string;
-        refresh?: string;
-        access?: string;
         id?: number;
+        access?: string;
+        refresh?: string;
       } | null>
     ) => {
-      state.userData = {
-        id: action.payload?.id || state.userData.id,
-        email:
-          action.payload?.email ||
-          state.userData.email ||
-          getValueFromLocalStorage("user"),
-        username: action.payload?.username || state.userData.username,
-        // refresh: action.payload?.refresh || state.userData?.refresh || "",
-        // access:
-        //   action.payload?.access ||
-        //   state.userData?.access ||
-        //   getValueFromLocalStorage("token"),
-      };
-      state.token = {
-        access:
-          action.payload?.access ||
-          state.token?.access ||
-          getValueFromLocalStorage("token"),
-      };
+      if (action.payload) {
+        state.userData = {
+          id: action.payload.id || state.userData?.id || 0,
+          email: action.payload.email || state.userData?.email || "",
+          username: action.payload.username || state.userData?.username || "",
+        };
+        state.token = {
+          access: action.payload.access || state.token?.access || "",
+          refresh: action.payload.refresh || state.token?.refresh || "",
+        };
+      } else {
+        state.userData = null;
+        state.token = null;
+      }
     },
   },
 });
