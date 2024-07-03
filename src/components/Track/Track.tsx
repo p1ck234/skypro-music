@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { setDislike, setLike } from "@/api/likes";
 import { useRouter } from "next/navigation";
 import { setAuthState, setUserData } from "@/store/features/authSlice";
+import { useLike } from "@/hooks/useLike";
 
 type PlaylistType = {
   track: TrackType;
@@ -25,9 +26,10 @@ export default function Track({ track, tracksData, isFavorite }: PlaylistType) {
   const isCurrentTrack = currentTrack ? currentTrack.id === id : false;
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const isLikedByUser =
-    isFavorite || stared_user.find((u) => u.id === userData?.id);
-  const [isLiked, setIsLiked] = useState(!!isLikedByUser);
+  const {isLiked, handleLike} = useLike({track});
+  // const isLikedByUser =
+  //   isFavorite || stared_user.find((u) => u.id === userData?.id);
+  // const [isLiked, setIsLiked] = useState(!!isLikedByUser);
 
   const logout = () => {
     dispatch(setAuthState(false));
@@ -41,36 +43,38 @@ export default function Track({ track, tracksData, isFavorite }: PlaylistType) {
     dispatch(setIsPlaying(true));
   };
 
-  const handleLikeClick = () => {
-    isLiked
-      ? setDislike(userData?.access, id)
-          .then(() => {})
-          .catch((error) => {
-            if (error) {
-              const errorData = JSON.parse(error.message);
-              if (errorData.status === 401) {
-                logout();
-                router.push("/signin");
-              }
-            }
-          })
-      : setLike(userData?.access, id)
-          .then(() => {})
-          .catch((error) => {
-            if (error) {
-              const errorData = JSON.parse(error.message);
-              if (errorData.status === 401) {
-                logout();
-                router.push("/signin");
-              }
-            }
-          });
-    setIsLiked(!isLiked);
-  };
 
-  useEffect(() => {
-    setIsLiked(!!isLikedByUser);
-  }, [track, isFavorite, userData, isLikedByUser]);
+
+  // const handleLikeClick = () => {
+  //   isLiked
+  //     ? setDislike(userData?.access, id)
+  //         .then(() => {})
+  //         .catch((error) => {
+  //           if (error) {
+  //             const errorData = JSON.parse(error.message);
+  //             if (errorData.status === 401) {
+  //               logout();
+  //               router.push("/signin");
+  //             }
+  //           }
+  //         })
+  //     : setLike(userData?.access, id)
+  //         .then(() => {})
+  //         .catch((error) => {
+  //           if (error) {
+  //             const errorData = JSON.parse(error.message);
+  //             if (errorData.status === 401) {
+  //               logout();
+  //               router.push("/signin");
+  //             }
+  //           }
+  //         });
+  //   setIsLiked(!isLiked);
+  // };
+
+  // useEffect(() => {
+  //   setIsLiked(!!isLikedByUser);
+  // }, [track, isFavorite, userData, isLikedByUser]);
 
   return (
     <div onClick={HandleTrackClick} className={styles.playlistItem}>
@@ -101,7 +105,7 @@ export default function Track({ track, tracksData, isFavorite }: PlaylistType) {
         <div className={styles.trackAlbum}>
           <span className={styles.trackAlbumLink}>{album}</span>
         </div>
-        <div onClick={handleLikeClick} className={styles.trackTime}>
+        <div onClick={handleLike} className={styles.trackTime}>
           <svg className={styles.trackTimeSvg}>
             <use
               xlinkHref={`/img/icon/sprite.svg#${

@@ -2,8 +2,10 @@
 import Link from "next/link";
 import styles from "./SideBar.module.css";
 import Image from "next/image";
+import { useInitLikes } from "@/hooks/useInitLikes";
 
 export default function SideBar() {
+  useInitLikes();
   return (
     <div className={styles.mainSidebar}>
       {/* <div className={styles.sidebarPersonal}>

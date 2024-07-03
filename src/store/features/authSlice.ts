@@ -8,7 +8,8 @@ type AuthStateType = {
     id: number;
     email: string;
     username: string;
-    refresh: string;
+  };
+  token: {
     access: string;
   };
 };
@@ -25,6 +26,7 @@ function checkLSAuth(key: string) {
 const initialState: AuthStateType = {
   authState: !!checkLSAuth("user"),
   userData: checkLSAuth("user"),
+  token: {access: checkLSAuth("token")}
 };
 
 const authSlice = createSlice({
@@ -51,10 +53,16 @@ const authSlice = createSlice({
           state.userData.email ||
           getValueFromLocalStorage("user"),
         username: action.payload?.username || state.userData.username,
-        refresh: action.payload?.refresh || state.userData?.refresh || "",
+        // refresh: action.payload?.refresh || state.userData?.refresh || "",
+        // access:
+        //   action.payload?.access ||
+        //   state.userData?.access ||
+        //   getValueFromLocalStorage("token"),
+      };
+      state.token = {
         access:
           action.payload?.access ||
-          state.userData?.access ||
+          state.token?.access ||
           getValueFromLocalStorage("token"),
       };
     },
