@@ -26,7 +26,7 @@ export default function CategoryPage({ params }: CategoryType) {
       .catch((error: any) => {
         throw new Error(error.message);
       });
-  }, [dispatch]);
+  }, [dispatch, params.id]);
 
   let title = "";
   switch (params.id) {

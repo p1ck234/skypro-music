@@ -1,4 +1,3 @@
-"use client"
 import { SingIn } from "@/components/SingIn/SingIn";
 
 export const SingInPage = () => {
