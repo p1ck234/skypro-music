@@ -1,87 +1,62 @@
 "use client";
-import { postRegUser } from "@/api/auth_reg_token";
+import Image from "next/image";
 import styles from "./SingUp.module.css";
 import clsx from "clsx";
-import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/hooks/hooks";
 import { useState } from "react";
+import { postAuthUser } from "@/api/auth_reg_token";
+import { setAuthState, setUserData } from "@/store/features/authSlice";
+import { useRouter } from "next/navigation";
+
 type SignupType = {
   email: string;
+  password: string;
   username: string;
-  passwordfirst: string;
-  passwordrepeat: string;
 };
+
 export const SingUp = () => {
-  const router = useRouter();
-  const [emailActive, setEmailActive] = useState<boolean>(false);
-  const [passwordActive, setPasswordActive] = useState<boolean>(false);
-  const [passwordCorrect, setPasswordCorrect] = useState<boolean>(false);
-  const [isNotFilled, setIsNotFilled] = useState<boolean>(true);
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-  const [loginData, setLoginData] = useState<SignupType>({
+  const dispatch = useAppDispatch();
+  const [signupData, setSignupData] = useState<SignupType>({
     email: "",
+    password: "",
     username: "",
-    passwordfirst: "",
-    passwordrepeat: "",
   });
 
-  const hanleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const router = useRouter();
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setIsSubmitted(false);
-    setIsNotFilled(false);
 
-    if (name === "email") {
-      setEmailActive(true);
-      if (value === "") {
-        setEmailActive(false);
-      }
-    }
-
-    if (name === "passwordfirst") {
-      if (value.length > 7 && /[a-zA-z]/.test(value) && /[0-9]/.test(value)) {
-        setPasswordCorrect(true);
-      } else {
-        setPasswordCorrect(false);
-      }
-      setPasswordActive(true);
-
-      if (value === "") {
-        setPasswordActive(false);
-      }
-    }
-
-    setLoginData({
-      ...loginData,
+    setSignupData({
+      ...signupData,
       [name]: value,
     });
   };
 
-  const handleSignup = async (event: any) => {
+  const handleSignup = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setIsSubmitted(true);
-    if (
-      loginData.email === "" ||
-      (loginData.passwordfirst === "" && loginData.passwordfirst.length < 8) ||
-      loginData.passwordrepeat === ""
-    ) {
-      setIsNotFilled(true);
-      return;
-    }
-    if (
-      loginData.email !== "" &&
-      loginData.passwordfirst === loginData.passwordrepeat
-    ) {
-      setIsNotFilled(false);
-    }
-    if (!isNotFilled) {
-      await postRegUser(loginData)
-        .then(() => {
-          router.push("/signin");
+    try {
+      const userData = await postAuthUser(signupData);
+      dispatch(setAuthState(true));
+      dispatch(
+        setUserData({
+          username: userData.username,
+          email: userData.email,
+          id: userData.id,
         })
-        .catch((error) => {
-          alert(error);
-        });
+      );
+
+      localStorage.setItem("user", JSON.stringify(userData));
+      
+      router.push("/");
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        console.error("Unexpected error", error);
+        alert("An unexpected error occurred");
+      }
     }
   };
 
@@ -89,67 +64,44 @@ export const SingUp = () => {
     <div className={styles.wrapper}>
       <div className={styles.containerSignup}>
         <div className={styles.modalBlock}>
-          <form className={styles.modalFormLogin}>
-            <a href="../">
+          <form className={styles.modalFormSignup} onSubmit={handleSignup}>
+            <Link href="/">
               <div className={styles.modalLogo}>
                 <Image
-                  src="/img/logo_modal.png"
-                  alt="logo"
                   width={140}
                   height={21}
+                  src="/img/logo_modal.png"
+                  alt="logo"
                 />
               </div>
-            </a>
+            </Link>
             <input
-              onChange={hanleInputChange}
+              onChange={handleInputChange}
               className={clsx(styles.modalInput, styles.login)}
               type="text"
               name="email"
               placeholder="Почта"
             />
-            {emailActive ? (
-              <div className={styles.emailExample}>
-                Пример: ivan_ivanov@mail.ru
-              </div>
-            ) : (
-              ""
-            )}
             <input
-              onChange={hanleInputChange}
-              className={clsx(styles.modalInput, styles.passwordFirst)}
+              onChange={handleInputChange}
+              className={clsx(styles.modalInput, styles.username)}
+              type="text"
+              name="username"
+              placeholder="Имя пользователя"
+            />
+            <input
+              onChange={handleInputChange}
+              className={clsx(styles.modalInput, styles.password)}
               type="password"
               name="password"
               placeholder="Пароль"
             />
-            {passwordActive ? (
-              <div
-                className={clsx(
-                  { [styles.passwordClueRed]: !passwordCorrect },
-                  { [styles.passwordClueGreen]: passwordCorrect }
-                )}
-              >
-                Минимум 8 символов из букв латиницей и цифр
-              </div>
-            ) : (
-              ""
-            )}
-            <input
-              onChange={hanleInputChange}
-              className={clsx(styles.modalInput, styles.passwordDouble)}
-              type="password"
-              name="password"
-              placeholder="Повторите пароль"
-            />
-            <button onClick={handleSignup} className={styles.modalBtnSingUp}>
-              <Link href="/">Зарегистрироваться</Link>
+            <button type="submit" className={styles.modalBtnEnter}>
+              <p className={styles.modalBtnEnterText}>Зарегистрироваться</p>
             </button>
-            {isNotFilled && isSubmitted ? (
-              <div className={styles.notFilled}>
-                Нужно заполнить все поля корректно
-              </div>
-            ) : (
-              ""
-            )}
+            <button className={styles.modalBtnSignup}>
+              <Link href="/signin">Войти</Link>
+            </button>
           </form>
         </div>
       </div>

@@ -1,4 +1,3 @@
-import { getValueFromLocalStorage } from "@/utils/getValueFromLS";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type AuthStateType = {
@@ -16,7 +15,7 @@ type AuthStateType = {
 
 function checkLSAuth(key: string) {
   try {
-    const data = JSON.parse(localStorage.getItem(key) || "");
+    const data = JSON.parse(localStorage.getItem(key) || "null");
     return data || null;
   } catch (error) {
     return null;
@@ -24,7 +23,7 @@ function checkLSAuth(key: string) {
 }
 
 const initialState: AuthStateType = {
-  authState: !!checkLSAuth("user"),
+  authState: !!checkLSAuth("token"),
   userData: checkLSAuth("user"),
   token: checkLSAuth("token"),
 };
@@ -56,13 +55,20 @@ const authSlice = createSlice({
           access: action.payload.access || state.token?.access || "",
           refresh: action.payload.refresh || state.token?.refresh || "",
         };
+        state.authState = true;
       } else {
         state.userData = null;
         state.token = null;
+        state.authState = false;
+      }
+    },
+    refreshToken: (state, action: PayloadAction<{ access: string }>) => {
+      if (state.token) {
+        state.token.access = action.payload.access;
       }
     },
   },
 });
 
-export const { setAuthState, setUserData } = authSlice.actions;
+export const { setAuthState, setUserData, refreshToken } = authSlice.actions;
 export const authReducer = authSlice.reducer;
