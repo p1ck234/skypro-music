@@ -1,94 +1,66 @@
-import { userType } from "@/types/types";
+import axios from "axios";
 
-const apiUrlUser = "https://skypro-music-api.skyeng.tech/user/";
+// URL API
+const API_URL = "https://skypro-music-api.skyeng.tech/user";
 
-const signup = "signup/";
-const login = "login/";
-const token = "token/";
-const tokenRefresh = "token/refresh/";
-
-type SignupType = {
-  email: string;
-  username: string;
-  passwordfirst: string;
-};
-
-type SigninType = {
+// Функция для регистрации пользователя
+export const postAuthUser = async (userData: {
   email: string;
   password: string;
+  username: string;
+}) => {
+  try {
+    const response = await axios.post(`${API_URL}/signup/`, userData, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to register user");
+  }
 };
 
-
-export async function postRegUser({ email, passwordfirst }: SignupType) {
-  const res = await fetch(apiUrlUser + signup, {
-    method: "POST",
-    body: JSON.stringify({
-      email: email,
-      password: passwordfirst,
-      username: email,
-    }),
-    headers: {
-      "content-type": "application/json",
-    },
-  });
-  if (!res.ok) {
-    throw new Error("Ошибка");
+// Функция для входа пользователя
+export const postLoginUser = async (loginData: {
+  email: string;
+  password: string;
+}) => {
+  try {
+    const response = await axios.post(`${API_URL}/login/`, loginData, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to login");
   }
-  const data = await res.json();
+};
 
-  return data;
-}
-
-
-export async function postAuthUser({ email, password }: SigninType) {
-  const res = await fetch(apiUrlUser + login, {
-    method: "POST",
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
-    headers: {
-      "content-type": "application/json",
-    },
-  });
-  if (!res.ok) {
-    throw new Error("Ошибка");
+// Функция для получения токена
+export const postToken = async (loginData: {
+  email: string;
+  password: string;
+}) => {
+  try {
+    const response = await axios.post(`${API_URL}/token/`, loginData, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to get token");
   }
-  const data = await res.json();
-  return data;
-}
+};
 
-export async function postToken({ email, password }: SigninType) {
-  const res = await fetch(apiUrlUser + token, {
-    method: "POST",
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
-    headers: {
-      "content-type": "application/json",
-    },
-  });
-  if (!res.ok) {
-    throw new Error("Ошибка при получении данных");
+// Функция для обновления токена
+export const postRefreshToken = async (refreshToken: string) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/token/refresh/`,
+      { refresh: refreshToken },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to refresh token");
   }
-  const data = await res.json();
-  return data;
-}
-
-export async function postRefreshToken({ refresh }: userType) {
-  const res = await fetch(apiUrlUser + tokenRefresh, {
-    method: "POST",
-    body: JSON.stringify({
-      refresh: refresh,
-    }),
-    headers: {
-      "content-type": "application/json",
-    },
-  });
-  if (!res.ok) {
-    throw new Error("Ошибка при получении данных");
-  }
-  const data = await res.json();
-  return data;
-}
+};
