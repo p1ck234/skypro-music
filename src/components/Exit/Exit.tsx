@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import styles from "./Exit.module.css";
 import { setAuthState, setUserData } from "@/store/features/authSlice";
 import { useEffect, useState } from "react";
+import { clearLikedTracks } from "@/store/features/playlistSlice";
 
 const Exit = () => {
   const dispatch = useAppDispatch();
@@ -17,6 +18,7 @@ const Exit = () => {
   const logout = () => {
     dispatch(setAuthState(false));
     dispatch(setUserData(null));
+    dispatch(clearLikedTracks()); // Очищаем лайкнутые треки
     localStorage.removeItem("user");
     localStorage.removeItem("token");
   };

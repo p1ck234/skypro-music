@@ -101,6 +101,9 @@ const playlistSlice = createSlice({
         state.likedTracks.push(id);
       }
     },
+    clearLikedTracks(state) {
+      state.likedTracks = [];
+    },
     setFilters: (
       state,
       action: PayloadAction<{
@@ -179,5 +182,6 @@ export const {
   setFilters,
   setLike,
   setLikedTracks,
+  clearLikedTracks,
 } = playlistSlice.actions;
 export const playlistReducer = playlistSlice.reducer;
