@@ -5,7 +5,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useAppDispatch } from "@/hooks/hooks";
 import { useState } from "react";
-import { postAuthUser, postToken } from "@/api/auth_reg_token";
+import { postLoginUser, postToken } from "@/api/auth_reg_token";
 import { setAuthState, setUserData } from "@/store/features/authSlice";
 import { useRouter } from "next/navigation";
 
@@ -35,7 +35,7 @@ export const SingIn = () => {
   const handleSignin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const userData = await postAuthUser(loginData);
+      const userData = await postLoginUser(loginData);
       dispatch(setAuthState(true));
       dispatch(
         setUserData({
@@ -46,11 +46,16 @@ export const SingIn = () => {
       );
 
       localStorage.setItem("user", JSON.stringify(userData));
-      
+
       const tokenData = await postToken(loginData);
-      localStorage.setItem("token", JSON.stringify(tokenData.access));
-      dispatch(setUserData({ refresh: tokenData.refresh, access: tokenData.access }));
-      
+      localStorage.setItem(
+        "token",
+        JSON.stringify({ access: tokenData.access, refresh: tokenData.refresh })
+      );
+      dispatch(
+        setUserData({ refresh: tokenData.refresh, access: tokenData.access })
+      );
+
       router.push("/");
     } catch (error) {
       alert(error);
