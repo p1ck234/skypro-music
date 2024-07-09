@@ -15,6 +15,7 @@ type PlaylistStateType = {
   };
   filteredTracks: TrackType[];
   initialTracks: TrackType[];
+  likedTracks: number[];
 };
 
 //Начальное состояние
@@ -32,6 +33,7 @@ const initialState: PlaylistStateType = {
   },
   filteredTracks: [],
   initialTracks: [],
+  likedTracks: [],
 };
 
 const playlistSlice = createSlice({
@@ -87,6 +89,20 @@ const playlistSlice = createSlice({
     },
     setIsPlaying: (state, action: PayloadAction<boolean>) => {
       state.isPlaying = action.payload;
+    },
+    setLikedTracks: (state, action: PayloadAction<number[]>) => {
+      state.likedTracks = action.payload;
+    },
+    setLike: (state, action: PayloadAction<{ id: number }>) => {
+      const { id } = action.payload;
+      if (state.likedTracks.includes(id)) {
+        state.likedTracks = state.likedTracks.filter((item) => item !== id);
+      } else {
+        state.likedTracks.push(id);
+      }
+    },
+    clearLikedTracks(state) {
+      state.likedTracks = [];
     },
     setFilters: (
       state,
@@ -164,5 +180,8 @@ export const {
   setIsShuffle,
   setIsPlaying,
   setFilters,
+  setLike,
+  setLikedTracks,
+  clearLikedTracks,
 } = playlistSlice.actions;
 export const playlistReducer = playlistSlice.reducer;

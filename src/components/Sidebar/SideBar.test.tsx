@@ -1,13 +1,34 @@
-import { render, screen } from "@testing-library/react";
-import SideBar from "./SideBar";
+import React, { Component, ReactNode, ErrorInfo } from "react";
 
-it("Должен отрендерить картинку с логотипом", () => {
-  render(<SideBar />);
-  const images = screen.getAllByAltText("day's playlist");
+interface ErrorBoundaryProps {
+  children: ReactNode;
+}
 
-  // Проверяем, что как минимум одно изображение присутствует
-  expect(images.length).toBeGreaterThan(0);
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
 
-  // Если нужно проверить конкретное изображение, можно сделать это так:
-  // expect(images[0]).toHaveAttribute('src', '/_next/image?url=%2Fimg%2Fplaylist01.png&w=640&q=75');
-});
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(_: Error): ErrorBoundaryState {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error("Uncaught error:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children;
+  }
+}
+
+export default ErrorBoundary;

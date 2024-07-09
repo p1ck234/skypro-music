@@ -3,9 +3,23 @@ import { useState } from "react";
 import styles from "./Navigation.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import { setAuthState, setUserData } from "@/store/features/authSlice";
+import { clearLikedTracks } from "@/store/features/playlistSlice"; // Импортируем экшен
 
 export default function Navigation() {
+  const logged = useAppSelector((state) => state.auth.authState);
+  const dispatch = useAppDispatch();
   const [isOpened, setIsOpened] = useState<boolean>(false);
+
+  const logout = () => {
+    dispatch(setAuthState(false));
+    dispatch(setUserData(null));
+    dispatch(clearLikedTracks()); // Очищаем лайкнутые треки
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+  };
+
   return (
     <nav className={styles.mainNav}>
       <div className={styles.navLogo}>
@@ -36,14 +50,20 @@ export default function Navigation() {
               </Link>
             </li>
             <li className={styles.menuItem}>
-              <a href="#" className={styles.menuLink}>
+              <Link href="/tracks/favorite" className={styles.menuLink}>
                 Мой плейлист
-              </a>
+              </Link>
             </li>
             <li className={styles.menuItem}>
-              <a href="/signin" className={styles.menuLink}>
-                Войти
-              </a>
+              {logged ? (
+                <Link onClick={logout} href="/" className={styles.menuLink}>
+                Выйти
+              </Link>
+              ) : (
+                <Link href="/signin" className={styles.menuLink}>
+                  Войти
+                </Link>
+              )}
             </li>
           </ul>
         </div>
